@@ -1,7 +1,8 @@
 import { Form } from './common/Form';
 import { IOrderContacts, IOrderAddress, IOrderForm } from '../types/index';
-import { EventEmitter, IEvents } from './base/Events';
+import { EventEmitter, IEvents } from './base/events';
 import { ensureElement } from '../utils/utils';
+import { Events } from '../types';
 
 export class OrderAddress extends Form<IOrderAddress> {
 	protected _onlineButton: HTMLButtonElement;
@@ -69,7 +70,7 @@ export class OrderContacts extends Form<IOrderContacts> {
 
 		this.container.addEventListener('submit', (event: Event) => {
 			event.preventDefault();
-			this.events.emit('success:open');
+			this.events.emit(Events.SUCCESS_OPEN);
 		});
 	}
 

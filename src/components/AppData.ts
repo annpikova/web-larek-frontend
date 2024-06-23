@@ -1,5 +1,6 @@
 import { Model } from './base/Model';
 import {
+	Events,
 	IFormErrors,
 	IAppState,
 	IOrderAPI,
@@ -76,18 +77,18 @@ export class AppState extends Model<IAppState> {
 	addBasket(item: Product) {
 		if (this.findOrderItem(item) === null) {
 			this._order.items.push(item);
-			this.emitChanges('basket:changed');
+			this.emitChanges(Events.BASKET_CHANGED);
 		}
 	}
 
 	removeBasket(item: Product) {
 		this._order.items = this._order.items.filter((el) => el.id != item.id);
-		this.emitChanges('basket:changed');
+		this.emitChanges(Events.BASKET_CHANGED);
 	}
 
 	clearBasket() {
 		this._order.items = [];
-		this.emitChanges('basket:changed');
+		this.emitChanges(Events.BASKET_CHANGED);
 	}
 
 	getTotal() {
@@ -117,12 +118,12 @@ export class AppState extends Model<IAppState> {
 
 	setCatalog(items: IProduct[]) {
 		this._catalog = items.map((item) => new Product(item, this.events));
-		this.emitChanges('items:changed', { catalog: this._catalog });
+		this.emitChanges(Events.ITEMS_CHANGED, { catalog: this._catalog });
 	}
 
 	setPreview(item: Product) {
 		this.preview = item.id;
-		this.emitChanges('preview:changed', item);
+		this.emitChanges(Events.PREVIEW_CHANGED, item);
 	}
 
 	setOrderField(field: keyof IOrderForm, value: string) {
@@ -148,7 +149,7 @@ export class AppState extends Model<IAppState> {
 		}
 
 		this.formErrors = errors;
-		this.events.emit('formErrors:change', this.formErrors);
+		this.events.emit(Events.FORM_ERRORS_CHANGE, this.formErrors);
 
 		return Object.keys(errors).length === 0;
 	}
@@ -165,7 +166,7 @@ export class AppState extends Model<IAppState> {
 		}
 
 		this.formErrors = errors;
-		this.events.emit('formErrorsContacts:change', this.formErrors);
+		this.events.emit(Events.FORM_ERRORS_CONTSACTS_CHANGE, this.formErrors);
 
 		return Object.keys(errors).length === 0;
 	}

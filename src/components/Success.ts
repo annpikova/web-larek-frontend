@@ -1,6 +1,7 @@
 import { Component } from './base/Component';
-import { EventEmitter } from './base/Events';
+import { EventEmitter } from './base/events';
 import { ensureElement } from '../utils/utils';
+import { Events } from '../types';
 
 export interface ISuccess {
 	total: number;
@@ -24,7 +25,7 @@ export class Success extends Component<ISuccess> {
 
 		if (this._close) {
 			this._close.addEventListener('click', () => {
-				events.emit('success:close');
+				events.emit(Events.SUCCESS_CLOSE);
 			});
 		}
 	}

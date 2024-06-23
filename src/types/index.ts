@@ -94,3 +94,23 @@ export interface IEventEmitter {
 
 export type IOrderForm = IOrderAddress & IOrderContacts;
 export type IFormErrors = Partial<Record<keyof IOrder, string>>;
+
+export enum Events {
+	MODAL_OPEN = 'modal:open',
+	MODAL_CLOSE = 'modal:close',
+	CARD_SELECT = 'card:select',
+	ITEMS_CHANGED = 'items:changed',
+	PREVIEW_CHANGED = 'preview:changed',
+	BASKET_OPEN = 'basket:open',
+	BASKET_CHANGED = 'basket:changed',
+	BASKET_ITEM_ADD = 'basket:item-add',
+	BASKET_REMOVE = 'basket:remove',
+	ORDER_SUBMIT = 'order:submit',
+	ORDER_OPEN = 'order:open',
+	ORDER_CHANGE = 'order:change',
+	CONTACTS_CHANGE = 'contacts:change',
+	FORM_ERRORS_CHANGE = 'formErrors:change',
+	FORM_ERRORS_CONTSACTS_CHANGE = 'formErrorsContacts:change',
+	SUCCESS_OPEN = 'success:open',
+	SUCCESS_CLOSE = 'success:close',
+}

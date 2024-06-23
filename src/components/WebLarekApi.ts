@@ -1,4 +1,4 @@
-import { Api, ApiListResponse } from './base/Api'; 
+import { Api, ApiListResponse } from './base/api';
 import { IOrderAPI, IOrderResult, IProduct} from "../types";
 
 export interface IWebLarekAPI {
